@@ -1,4 +1,4 @@
-#include "oled_driver.h"
+#include "oled.h"
 #include "serial_protocol.h"
 
 #include <Arduino.h>
@@ -9,7 +9,7 @@ void setup(void)
   Wire.begin();
   Serial.begin(9600);
 
-  oled_driver_init();
+  oled_init();
 }
 
 void loop(void)

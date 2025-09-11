@@ -1,5 +1,5 @@
-#ifndef DISPLAY_H
-#define DISPLAY_H
+#ifndef OLED_H
+#define OLED_H
 
 #include <stdint.h>
 #include <stddef.h>
@@ -16,7 +16,7 @@ typedef enum
     OLED_SET_IMAGE_INVALID_LENGTH,
 } oled_set_image_ret_t;
 
-void oled_driver_init();
-oled_set_image_ret_t oled_driver_set_image(const uint8_t *image_data, size_t length);
+void oled_init();
+oled_set_image_ret_t oled_set_image(const uint8_t *image_data, size_t length);
 
-#endif
+#endif // OLED_H

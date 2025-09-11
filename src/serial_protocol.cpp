@@ -1,7 +1,7 @@
 #include "serial_protocol.h"
 
 #include "crc16.h"
-#include "oled_driver.h"
+#include "oled.h"
 
 #include <Arduino.h>
 #include <assert.h>
@@ -99,7 +99,7 @@ void serial_protocol_process(void)
             protocol.state = RECIEVE_STATE_HEADER_LSB;
             if (calc == protocol.crc)
             {
-                oled_set_image_ret_t ret = oled_driver_set_image(protocol.payload, protocol.expected_len);
+                oled_set_image_ret_t ret = oled_set_image(protocol.payload, protocol.expected_len);
                 if (ret == OLED_SET_IMAGE_SUCCESS)
                 {
                     send_ack();
