@@ -2,5 +2,10 @@
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
-    "editor.rulers": [120],
+    "editor.rulers": [
+        120
+    ],
+    "files.associations": {
+        "cmath": "cpp"
+    },
 }

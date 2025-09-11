@@ -1,4 +1,5 @@
 #include "oled_driver.h"
+#include "serial_protocol.h"
 
 #include <Arduino.h>
 #include <Wire.h>
@@ -13,6 +14,6 @@ void setup(void)
 
 void loop(void)
 {
-  oled_driver_loop();
-  delay(1000);
+  serial_protocol_process();
+  delay(1);
 }
