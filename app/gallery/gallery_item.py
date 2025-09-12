@@ -1,6 +1,6 @@
 from PySide6.QtCore import QSize, Qt
 from PySide6.QtGui import QIcon, QImage, QPixmap
-from PySide6.QtWidgets import QToolButton
+from PySide6.QtWidgets import QGraphicsDropShadowEffect, QToolButton
 
 IMAGE_WIDTH = 128
 IMAGE_HEIGHT = 64
@@ -21,13 +21,17 @@ class GalleryItem(QToolButton):
         self.setIconSize(QSize(IMAGE_WIDTH, IMAGE_HEIGHT))
         self.setAutoRaise(True)
 
+        # Remove border from stylesheet
         self.setStyleSheet("""
             QToolButton {
-                border: 1px solid black;
-                border-radius: 4px;
+                border: none;
                 padding: 4px;
             }
-            QToolButton:hover {
-                border: 2px solid #0078d7;  /* highlight on hover */
-            }
         """)
+
+        shadow = QGraphicsDropShadowEffect(self)
+        shadow.setBlurRadius(8)
+        shadow.setXOffset(2)
+        shadow.setYOffset(2)
+        shadow.setColor(Qt.GlobalColor.black)
+        self.setGraphicsEffect(shadow)
