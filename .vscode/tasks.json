@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Python lint",
+            "type": "shell",
+            "command": "${command:python.interpreterPath} -m ruff check",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Python typecheck",
+            "type": "shell",
+            "command": "${command:python.interpreterPath} -m mypy .",
+            "group": "build",
+            "problemMatcher": []
+        },
+    ]
+}

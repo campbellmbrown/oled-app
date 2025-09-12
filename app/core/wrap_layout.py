@@ -33,6 +33,7 @@ class WrapLayout(QLayout):
     def takeAt(self, index: int) -> QLayoutItem:
         if 0 <= index < len(self.items):
             return self.items.pop(index)
+        return None  # type: ignore[return-value]
 
     def expandingDirections(self) -> Qt.Orientation:
         return Qt.Orientation(0)

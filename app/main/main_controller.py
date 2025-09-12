@@ -1,6 +1,6 @@
 import logging
 
-import qdarktheme
+import qdarktheme  # type: ignore[import-untyped]
 from PySide6.QtWidgets import QApplication
 from serial.tools import list_ports
 from serial.tools.list_ports_common import ListPortInfo
@@ -43,7 +43,7 @@ class MainController:
             display = f"{port.device} - {port.description}"
             self.view.port_options.addItem(display, userData=port)
 
-    def _change_theme(self, theme: str):
+    def _change_theme(self, theme: str) -> None:
         """Change the application theme."""
         stylesheet = qdarktheme.load_stylesheet(theme)
         application = QApplication.instance()
