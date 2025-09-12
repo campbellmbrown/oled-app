@@ -1,5 +1,7 @@
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QComboBox,
+    QDockWidget,
     QHBoxLayout,
     QLabel,
     QMainWindow,
@@ -12,6 +14,7 @@ from PySide6.QtWidgets import (
 )
 
 from app.gallery.gallery_view import GalleryView
+from app.log.log_view import LogView
 
 
 class MainView(QMainWindow):
@@ -19,6 +22,7 @@ class MainView(QMainWindow):
         super().__init__()
         self.resize(1000, 800)
         self._set_up_menu()
+        self._set_up_dock()
         self._set_up_port_selection()
 
         layout = QVBoxLayout()
@@ -44,6 +48,15 @@ class MainView(QMainWindow):
         menu_bar = QMenuBar()
         menu_bar.addMenu(file_menu)
         self.setMenuBar(menu_bar)
+
+    def _set_up_dock(self) -> None:
+        self.log_view = LogView()
+        dock = QDockWidget("Log")
+        dock.setWidget(self.log_view)
+        dock.setFeatures(
+            QDockWidget.DockWidgetFeature.DockWidgetMovable | QDockWidget.DockWidgetFeature.DockWidgetFloatable
+        )
+        self.addDockWidget(Qt.DockWidgetArea.BottomDockWidgetArea, dock)
 
     def _set_up_port_selection(self) -> None:
         self.port_options = QComboBox()
