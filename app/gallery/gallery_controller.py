@@ -18,30 +18,29 @@ class GalleryController(QObject):
         self.view = view
 
         for path in os.listdir(IMAGE_DIR):
+            # If it's in the root image directory, add to "Misc" tab
             if path.endswith(".png"):
                 file_path = os.path.join(IMAGE_DIR, path)
-                logging.info(f"Loading item: {file_path}")
-                name = os.path.splitext(path)[0]
-                item = GalleryItem(file_path, name)
-                self.view.add_to_tab("Misc", item)
+                self._add_item("Misc", file_path)
 
-                item.clicked.connect(lambda _, path=file_path: self.signal_image_selected.emit(path))
-
-            # Else if is a directory, create a new tab and add its images
+            # Else if is a directory, add to the tab named after the directory
             elif os.path.isdir(os.path.join(IMAGE_DIR, path)):
                 tab_name = path.replace("_", " ").title()
                 tab_path = os.path.join(IMAGE_DIR, path)
                 for subpath in os.listdir(tab_path):
                     if subpath.endswith(".png"):
                         file_path = os.path.join(tab_path, subpath)
-                        logging.info(f"Loading item: {file_path}")
-                        name = os.path.splitext(subpath)[0]
-                        item = GalleryItem(file_path, name)
-                        self.view.add_to_tab(tab_name, item)
-
-                        item.clicked.connect(lambda _, path=file_path: self.signal_image_selected.emit(path))
+                        self._add_item(tab_name, file_path)
 
         self.view.random_button.clicked.connect(self._select_random_image)
+
+    def _add_item(self, tab_name: str, file_path: str) -> None:
+        logging.info(f"Loading item: {file_path}")
+        name = os.path.splitext(os.path.basename(file_path))[0]
+        item = GalleryItem(file_path, name)
+        self.view.add_to_tab(tab_name, item)
+
+        item.clicked.connect(lambda _, path=file_path: self.signal_image_selected.emit(path))
 
     def _select_random_image(self) -> None:
         item = random.choice(self.view.items)
