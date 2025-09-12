@@ -1,4 +1,6 @@
-from PySide6.QtWidgets import QMainWindow, QMenu, QMenuBar
+from PySide6.QtWidgets import QMainWindow, QMenu, QMenuBar, QVBoxLayout, QWidget
+
+from app.gallery.gallery_view import GalleryView
 
 
 class MainView(QMainWindow):
@@ -6,6 +8,14 @@ class MainView(QMainWindow):
         super().__init__()
         self.resize(1000, 800)
         self._set_up_menu()
+
+        layout = QVBoxLayout()
+        gallery_view = GalleryView()
+
+        layout.addWidget(gallery_view)
+        cental_widget = QWidget()
+        cental_widget.setLayout(layout)
+        self.setCentralWidget(cental_widget)
 
     def _set_up_menu(self) -> None:
         file_menu = QMenu("&File", self)
