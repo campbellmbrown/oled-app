@@ -1,6 +1,7 @@
 #include "serial_protocol.h"
 
 #include "crc16.h"
+#include "led.h"
 #include "oled.h"
 
 #include <Arduino.h>
@@ -53,6 +54,7 @@ void serial_protocol_process(void)
         case RECIEVE_STATE_HEADER_LSB:
             if (rx_byte == HEADER_1)
             {
+                led_set_color(COLOR_BLUE);
                 protocol.state = RECIEVE_STATE_HEADER_MSB;
             }
             break;
@@ -99,6 +101,7 @@ void serial_protocol_process(void)
             protocol.state = RECIEVE_STATE_HEADER_LSB;
             if (calc == protocol.crc)
             {
+                led_set_color(COLOR_RED);
                 oled_set_image_ret_t ret = oled_set_image(protocol.payload, protocol.expected_len);
                 if (ret == OLED_SET_IMAGE_SUCCESS)
                 {
@@ -120,12 +123,14 @@ void serial_protocol_process(void)
 
 static void send_ack(void)
 {
+    led_set_color(COLOR_GREEN);
     Serial.write(ACK);
     Serial.flush();
 }
 
 static void send_nack(void)
 {
+    led_set_color(COLOR_WHITE);
     Serial.write(NACK);
     Serial.flush();
 }

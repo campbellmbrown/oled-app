@@ -1,3 +1,4 @@
+#include "led.h"
 #include "oled.h"
 #include "serial_protocol.h"
 
@@ -7,8 +8,8 @@
 void setup(void)
 {
   Wire.begin();
-  Serial.begin(9600);
-
+  Serial.begin(115200);
+  led_set_color(COLOR_GREEN);
   oled_init();
 }
 

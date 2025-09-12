@@ -16,7 +16,7 @@ def send_image(image_path: str, serial_port: str) -> None:
     packet = create_packet(payload)
 
     try:
-        ser = serial.Serial(serial_port, baudrate=9600, timeout=2)
+        ser = serial.Serial(serial_port, baudrate=115200, timeout=2)
         if not ser.is_open:
             ser.open()
 
