@@ -1,3 +1,4 @@
 -r requirements.txt  # include normal dependencies
 mypy
 ruff
+types-pyserial
