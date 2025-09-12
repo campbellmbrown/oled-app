@@ -5,6 +5,7 @@ from PySide6.QtWidgets import QApplication
 from serial.tools import list_ports
 from serial.tools.list_ports_common import ListPortInfo
 
+from app.gallery.gallery_controller import GalleryController
 from app.log.log_controller import LogController
 from app.main.main_view import MainView
 
@@ -22,6 +23,8 @@ class MainController:
         view.light_theme_action.triggered.connect(lambda: self._change_theme("light"))
         view.light_theme_action.setChecked(True)
         self._change_theme("light")
+
+        self.gallery_controller = GalleryController(view.gallery_view)
 
         view.refresh_button.clicked.connect(self._populate_ports)
         self._populate_ports()

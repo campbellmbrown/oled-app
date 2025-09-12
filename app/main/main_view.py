@@ -27,7 +27,7 @@ class MainView(QMainWindow):
         self._set_up_port_selection()
 
         layout = QVBoxLayout()
-        gallery_view = GalleryView()
+        self.gallery_view = GalleryView()
 
         control_layout = QHBoxLayout()
         control_layout.addWidget(QLabel("Port:"))
@@ -36,7 +36,7 @@ class MainView(QMainWindow):
         control_layout.addStretch()
 
         layout.addLayout(control_layout)
-        layout.addWidget(gallery_view)
+        layout.addWidget(self.gallery_view)
 
         central_widget = QWidget()
         central_widget.setLayout(layout)
