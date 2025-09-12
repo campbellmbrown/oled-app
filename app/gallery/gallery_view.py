@@ -1,7 +1,6 @@
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QPushButton, QScrollArea, QTabWidget, QVBoxLayout, QWidget
 
-from app.core.page_base import PageBase
 from app.core.wrap_layout import WrapLayout
 from app.gallery.gallery_item import GalleryItem
 
@@ -20,7 +19,7 @@ class GalleryTab(QScrollArea):
         self.setWidget(widget)
 
 
-class GalleryView(PageBase):
+class GalleryView(QWidget):
     def __init__(self) -> None:
         super().__init__()
         self.items: list[GalleryItem] = []
