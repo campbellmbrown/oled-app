@@ -1,11 +1,14 @@
 from PySide6.QtGui import QImage
 
+from app.image_settings import ImageSettings
+
 THRESHOLD = 128
 
 
-def img_to_pixels(image_path: str) -> bytearray:
+def img_to_pixels(image_path: str, image_settings: ImageSettings) -> bytearray:
     image = QImage(image_path).convertToFormat(QImage.Format.Format_Grayscale8)
-    image.invertPixels()
+    if image_settings.invert:
+        image.invertPixels()
 
     width = image.width()
     height = image.height()

@@ -7,6 +7,7 @@ from serial.tools.list_ports_common import ListPortInfo
 
 from app.gallery.gallery_controller import GalleryController
 from app.image_sender import send_image
+from app.image_settings import ImageSettings
 from app.log.log_controller import LogController
 from app.main.main_view import MainView
 
@@ -53,4 +54,7 @@ class MainController:
         application.setStyleSheet(stylesheet)
 
     def _on_image_selected(self, image_path: str) -> None:
-        send_image(image_path, self.get_selected_port())
+        send_image(image_path, self.get_selected_port(), self._get_image_settings())
+
+    def _get_image_settings(self) -> ImageSettings:
+        return ImageSettings(invert=self.view.invert_checkbox.isChecked())

@@ -2,15 +2,16 @@ import logging
 
 import serial
 
+from app.image_settings import ImageSettings
 from app.img_to_pixels import img_to_pixels
 from app.protocol import create_packet
 
 
-def send_image(image_path: str, serial_port: str) -> None:
+def send_image(image_path: str, serial_port: str, image_settings: ImageSettings) -> None:
     """Send an image to the device over the specified serial port."""
 
     logging.info(f"Sending image {image_path} to port {serial_port}")
-    payload = img_to_pixels(image_path)
+    payload = img_to_pixels(image_path, image_settings)
     packet = create_packet(payload)
 
     try:

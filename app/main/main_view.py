@@ -1,6 +1,7 @@
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QAction, QActionGroup
 from PySide6.QtWidgets import (
+    QCheckBox,
     QComboBox,
     QDockWidget,
     QHBoxLayout,
@@ -24,7 +25,7 @@ class MainView(QMainWindow):
         self.resize(1000, 800)
         self._set_up_menu()
         self._set_up_dock()
-        self._set_up_port_selection()
+        self._set_up_controls()
 
         layout = QVBoxLayout()
         self.gallery_view = GalleryView()
@@ -34,6 +35,11 @@ class MainView(QMainWindow):
         control_layout.addWidget(self.port_options)
         control_layout.addWidget(self.refresh_button)
         control_layout.addStretch()
+        control_layout.addWidget(self.invert_checkbox)
+
+        image_settings_layout = QHBoxLayout()
+        image_settings_layout.addWidget(self.invert_checkbox)
+        image_settings_layout.addStretch()
 
         layout.addLayout(control_layout)
         layout.addWidget(self.gallery_view)
@@ -77,12 +83,16 @@ class MainView(QMainWindow):
         )
         self.addDockWidget(Qt.DockWidgetArea.BottomDockWidgetArea, dock)
 
-    def _set_up_port_selection(self) -> None:
+    def _set_up_controls(self) -> None:
         self.port_options = QComboBox()
         self.port_options.setFixedWidth(300)
+
         self.refresh_button = QToolButton()
         refresh_button_style = self.refresh_button.style()
         assert isinstance(refresh_button_style, QStyle)
         icon = refresh_button_style.standardIcon(QStyle.StandardPixmap.SP_BrowserReload)
         self.refresh_button.setIcon(icon)
         self.refresh_button.setToolTip("Refresh")
+
+        self.invert_checkbox = QCheckBox("Invert Colors")
+        self.invert_checkbox.setChecked(False)
