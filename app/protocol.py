@@ -2,7 +2,7 @@ HEADER_1 = 0xAA
 HEADER_2 = 0x55
 
 
-def crc16(data: bytes) -> int:
+def crc16(data: bytearray) -> int:
     crc = 0xFFFF
     for byte in data:
         crc ^= byte
@@ -14,7 +14,7 @@ def crc16(data: bytes) -> int:
     return crc
 
 
-def create_packet(image_data: bytes) -> bytearray:
+def create_packet(image_data: bytearray) -> bytearray:
     packet = bytearray()
 
     # Header

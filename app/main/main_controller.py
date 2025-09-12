@@ -6,6 +6,7 @@ from serial.tools import list_ports
 from serial.tools.list_ports_common import ListPortInfo
 
 from app.gallery.gallery_controller import GalleryController
+from app.image_sender import send_image
 from app.log.log_controller import LogController
 from app.main.main_view import MainView
 
@@ -25,6 +26,7 @@ class MainController:
         self._change_theme("light")
 
         self.gallery_controller = GalleryController(view.gallery_view)
+        self.gallery_controller.signal_image_selected.connect(self._on_image_selected)
 
         view.refresh_button.clicked.connect(self._populate_ports)
         self._populate_ports()
@@ -49,3 +51,6 @@ class MainController:
         application = QApplication.instance()
         assert isinstance(application, QApplication)
         application.setStyleSheet(stylesheet)
+
+    def _on_image_selected(self, image_path: str) -> None:
+        send_image(image_path, self.get_selected_port())
