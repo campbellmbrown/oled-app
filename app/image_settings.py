@@ -3,4 +3,5 @@ from dataclasses import dataclass
 
 @dataclass
 class ImageSettings:
-    invert: bool = False
+    invert: bool
+    threshold: int

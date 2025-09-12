@@ -2,8 +2,6 @@ from PySide6.QtGui import QImage
 
 from app.image_settings import ImageSettings
 
-THRESHOLD = 128
-
 
 def img_to_pixels(image_path: str, image_settings: ImageSettings) -> bytearray:
     image = QImage(image_path).convertToFormat(QImage.Format.Format_Grayscale8)
@@ -19,7 +17,7 @@ def img_to_pixels(image_path: str, image_settings: ImageSettings) -> bytearray:
         byte = 0
         for x in range(width):
             pixel = image.pixelColor(x, y).value()  # 0-255 grayscale
-            bit = 1 if pixel < THRESHOLD else 0
+            bit = 1 if pixel < image_settings.threshold else 0
             byte = (byte << 1) | bit
             if (x + 1) % 8 == 0:
                 swapped_byte = int(f"{byte:08b}"[::-1], 2)  # optional bit reversal

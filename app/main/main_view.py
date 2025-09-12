@@ -9,6 +9,7 @@ from PySide6.QtWidgets import (
     QMainWindow,
     QMenu,
     QMenuBar,
+    QSpinBox,
     QStyle,
     QToolButton,
     QVBoxLayout,
@@ -35,6 +36,8 @@ class MainView(QMainWindow):
         control_layout.addWidget(self.port_options)
         control_layout.addWidget(self.refresh_button)
         control_layout.addStretch()
+        control_layout.addWidget(QLabel("Threshold:"))
+        control_layout.addWidget(self.threshold)
         control_layout.addWidget(self.invert_checkbox)
 
         image_settings_layout = QHBoxLayout()
@@ -96,3 +99,8 @@ class MainView(QMainWindow):
 
         self.invert_checkbox = QCheckBox("Invert Colors")
         self.invert_checkbox.setChecked(False)
+
+        self.threshold = QSpinBox()
+        self.threshold.setRange(0, 255)
+        self.threshold.setValue(128)
+        self.threshold.setFixedWidth(80)

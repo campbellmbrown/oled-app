@@ -57,4 +57,7 @@ class MainController:
         send_image(image_path, self.get_selected_port(), self._get_image_settings())
 
     def _get_image_settings(self) -> ImageSettings:
-        return ImageSettings(invert=self.view.invert_checkbox.isChecked())
+        return ImageSettings(
+            invert=self.view.invert_checkbox.isChecked(),
+            threshold=self.view.threshold.value(),
+        )
