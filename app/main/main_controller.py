@@ -5,6 +5,7 @@ from PySide6.QtWidgets import QApplication
 from serial.tools import list_ports
 from serial.tools.list_ports_common import ListPortInfo
 
+from app.animation.animation_controller import AnimationController
 from app.gallery.gallery_controller import GalleryController
 from app.image_sender import send_image
 from app.image_settings import ImageSettings
@@ -28,6 +29,8 @@ class MainController:
 
         self.gallery_controller = GalleryController(view.gallery_view)
         self.gallery_controller.signal_image_selected.connect(self._on_image_selected)
+
+        self.animation_controller = AnimationController(view.animation_view)
 
         view.refresh_button.clicked.connect(self._populate_ports)
         self._populate_ports()

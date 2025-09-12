@@ -11,11 +11,13 @@ from PySide6.QtWidgets import (
     QMenuBar,
     QSpinBox,
     QStyle,
+    QTabWidget,
     QToolButton,
     QVBoxLayout,
     QWidget,
 )
 
+from app.animation.animation_view import AnimationView
 from app.gallery.gallery_view import GalleryView
 from app.log.log_view import LogView
 
@@ -30,6 +32,7 @@ class MainView(QMainWindow):
 
         layout = QVBoxLayout()
         self.gallery_view = GalleryView()
+        self.animation_view = AnimationView()
 
         control_layout = QHBoxLayout()
         control_layout.addWidget(QLabel("Port:"))
@@ -44,8 +47,12 @@ class MainView(QMainWindow):
         image_settings_layout.addWidget(self.invert_checkbox)
         image_settings_layout.addStretch()
 
+        tabs = QTabWidget()
+        tabs.addTab(self.gallery_view, "Gallery")
+        tabs.addTab(self.animation_view, "Animation")
+
         layout.addLayout(control_layout)
-        layout.addWidget(self.gallery_view)
+        layout.addWidget(tabs)
 
         central_widget = QWidget()
         central_widget.setLayout(layout)
