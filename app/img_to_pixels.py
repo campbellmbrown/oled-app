@@ -1,20 +1,21 @@
-from PySide6.QtGui import QImage, QPixmap
+from PySide6.QtGui import QImage
 
 THRESHOLD = 128
 
 
-def img_to_pixels(pixmap: QPixmap) -> bytearray:
-    img = pixmap.toImage().convertToFormat(QImage.Format.Format_Grayscale8)
+def img_to_pixels(image_path: str) -> bytearray:
+    image = QImage(image_path).convertToFormat(QImage.Format.Format_Grayscale8)
+    image.invertPixels()
 
-    width = img.width()
-    height = img.height()
+    width = image.width()
+    height = image.height()
 
     byte_array = bytearray()
 
     for y in range(height):
         byte = 0
         for x in range(width):
-            pixel = img.pixelColor(x, y).value()  # 0-255 grayscale
+            pixel = image.pixelColor(x, y).value()  # 0-255 grayscale
             bit = 1 if pixel < THRESHOLD else 0
             byte = (byte << 1) | bit
             if (x + 1) % 8 == 0:

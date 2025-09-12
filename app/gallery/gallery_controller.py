@@ -20,7 +20,8 @@ class GalleryController(QObject):
             if filename.endswith(".png"):
                 logging.info(f"Loading gallery item: {filename}")
                 file_path = os.path.join(IMAGE_DIR, filename)
-                item = GalleryItem(file_path, os.path.splitext(filename)[0])
+                name = os.path.splitext(filename)[0]
+                item = GalleryItem(file_path, name)
                 self.view.gallery_layout.addWidget(item)
 
                 item.clicked.connect(lambda _, path=file_path: self.signal_image_selected.emit(path))
