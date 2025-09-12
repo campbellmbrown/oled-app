@@ -1,4 +1,5 @@
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QAction, QActionGroup
 from PySide6.QtWidgets import (
     QComboBox,
     QDockWidget,
@@ -43,6 +44,24 @@ class MainView(QMainWindow):
 
     def _set_up_menu(self) -> None:
         file_menu = QMenu("&File", self)
+        preferences_menu = QMenu("&Preferences", self)
+        theme_menu = QMenu("&Theme", self)
+
+        self.light_theme_action = QAction("Light")
+        self.dark_theme_action = QAction("Dark")
+
+        theme_action_group = QActionGroup(self)
+        theme_action_group.setExclusive(True)
+        self.light_theme_action.setCheckable(True)
+        self.dark_theme_action.setCheckable(True)
+        theme_action_group.addAction(self.light_theme_action)
+        theme_action_group.addAction(self.dark_theme_action)
+        theme_menu.addAction(self.light_theme_action)
+        theme_menu.addAction(self.dark_theme_action)
+
+        file_menu.addMenu(preferences_menu)
+        preferences_menu.addMenu(theme_menu)
+        file_menu.addSeparator()
         file_menu.addAction("E&xit", self.close)
 
         menu_bar = QMenuBar()

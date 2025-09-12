@@ -1,5 +1,7 @@
 import logging
 
+import qdarktheme
+from PySide6.QtWidgets import QApplication
 from serial.tools import list_ports
 from serial.tools.list_ports_common import ListPortInfo
 
@@ -15,6 +17,11 @@ class MainController:
         log_controller.add_to_logger()
         logging.getLogger().setLevel(logging.DEBUG)
         logging.info("Application started.")
+
+        view.dark_theme_action.triggered.connect(lambda: self._change_theme("dark"))
+        view.light_theme_action.triggered.connect(lambda: self._change_theme("light"))
+        view.light_theme_action.setChecked(True)
+        self._change_theme("light")
 
         view.refresh_button.clicked.connect(self._populate_ports)
         self._populate_ports()
@@ -32,3 +39,10 @@ class MainController:
         for port in ports:
             display = f"{port.device} - {port.description}"
             self.view.port_options.addItem(display, userData=port)
+
+    def _change_theme(self, theme: str):
+        """Change the application theme."""
+        stylesheet = qdarktheme.load_stylesheet(theme)
+        application = QApplication.instance()
+        assert isinstance(application, QApplication)
+        application.setStyleSheet(stylesheet)
