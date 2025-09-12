@@ -9,6 +9,7 @@ IMAGE_HEIGHT = 64
 class GalleryItem(QToolButton):
     def __init__(self, image_path: str, title: str) -> None:
         super().__init__()
+        self.image_path = image_path
 
         image = QImage(image_path).convertToFormat(QImage.Format.Format_Grayscale8)
 

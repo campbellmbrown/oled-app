@@ -1,5 +1,6 @@
 import logging
 import os
+import random
 
 from PySide6.QtCore import QObject, Signal
 
@@ -16,12 +17,32 @@ class GalleryController(QObject):
         super().__init__()
         self.view = view
 
-        for filename in os.listdir(IMAGE_DIR):
-            if filename.endswith(".png"):
-                logging.info(f"Loading gallery item: {filename}")
-                file_path = os.path.join(IMAGE_DIR, filename)
-                name = os.path.splitext(filename)[0]
+        for path in os.listdir(IMAGE_DIR):
+            if path.endswith(".png"):
+                file_path = os.path.join(IMAGE_DIR, path)
+                logging.info(f"Loading item: {file_path}")
+                name = os.path.splitext(path)[0]
                 item = GalleryItem(file_path, name)
-                self.view.gallery_layout.addWidget(item)
+                self.view.add_to_tab("Misc", item)
 
                 item.clicked.connect(lambda _, path=file_path: self.signal_image_selected.emit(path))
+
+            # Else if is a directory, create a new tab and add its images
+            elif os.path.isdir(os.path.join(IMAGE_DIR, path)):
+                tab_name = path.replace("_", " ").title()
+                tab_path = os.path.join(IMAGE_DIR, path)
+                for subpath in os.listdir(tab_path):
+                    if subpath.endswith(".png"):
+                        file_path = os.path.join(tab_path, subpath)
+                        logging.info(f"Loading item: {file_path}")
+                        name = os.path.splitext(subpath)[0]
+                        item = GalleryItem(file_path, name)
+                        self.view.add_to_tab(tab_name, item)
+
+                        item.clicked.connect(lambda _, path=file_path: self.signal_image_selected.emit(path))
+
+        self.view.random_button.clicked.connect(self._select_random_image)
+
+    def _select_random_image(self) -> None:
+        item = random.choice(self.view.items)
+        self.signal_image_selected.emit(item.image_path)
