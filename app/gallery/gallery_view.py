@@ -1,6 +1,8 @@
-from PySide6.QtCore import QSize
+import os
+
+from PySide6.QtCore import QSize, Qt
 from PySide6.QtGui import QIcon, QPixmap
-from PySide6.QtWidgets import QPushButton
+from PySide6.QtWidgets import QToolButton
 
 from app.core.page_base import PageBase
 from app.core.wrap_layout import WrapLayout
@@ -9,20 +11,40 @@ IMAGE_WIDTH = 128
 IMAGE_HEIGHT = 64
 
 
+class GalleryItem(QToolButton):
+    def __init__(self, image_path: str, title: str) -> None:
+        super().__init__()
+        pixmap = QPixmap(image_path)
+        assert pixmap.width() == IMAGE_WIDTH, f"Image width expected to be {IMAGE_WIDTH}px, got {pixmap.width()}px"
+        assert pixmap.height() == IMAGE_HEIGHT, f"Image height expected to be {IMAGE_HEIGHT}px, got {pixmap.height()}px"
+        self.setIcon(QIcon(pixmap))
+        self.setText(title)
+        self.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextUnderIcon)
+        self.setIconSize(QSize(IMAGE_WIDTH, IMAGE_HEIGHT))
+        self.setAutoRaise(True)
+
+        self.setStyleSheet("""
+            QToolButton {
+                border: 1px solid black;
+                border-radius: 4px;
+                padding: 4px;
+            }
+            QToolButton:hover {
+                border: 2px solid #0078d7;  /* highlight on hover */
+            }
+        """)
+
+
 class GalleryView(PageBase):
     def __init__(self):
         super().__init__()
 
         layout = WrapLayout(self, margin=20, hspacing=10, vspacing=10)
 
-        for _ in range(1, 50):
-            button = QPushButton()
-            pixmap = QPixmap("scripts/test.png")
-            assert pixmap.width() == IMAGE_WIDTH
-            assert pixmap.height() == IMAGE_HEIGHT
-            button.setIcon(QIcon(pixmap))
-            button.setIconSize(QSize(IMAGE_WIDTH, IMAGE_HEIGHT))
-            button.setFixedSize(IMAGE_WIDTH + 10, IMAGE_HEIGHT + 10)
-            layout.addWidget(button)
+        for filename in os.listdir("app/images"):
+            if filename.endswith(".png"):
+                print(f"Loading gallery item: {filename}")
+                item = GalleryItem(f"app/images/{filename}", os.path.splitext(filename)[0])
+                layout.addWidget(item)
 
         self.set_layout(layout)
