@@ -36,11 +36,14 @@ class GalleryController(QObject):
 
     def _add_item(self, tab_name: str, file_path: str) -> None:
         logging.info(f"Loading item: {file_path}")
+        self.view.add_to_tab(tab_name, self._create_item(file_path))
+        self.view.add_to_tab("All", self._create_item(file_path))
+
+    def _create_item(self, file_path: str) -> GalleryItem:
         name = os.path.splitext(os.path.basename(file_path))[0]
         item = GalleryItem(file_path, name)
-        self.view.add_to_tab(tab_name, item)
-
         item.clicked.connect(lambda _, path=file_path: self.signal_image_selected.emit(path))
+        return item
 
     def _select_random_image(self) -> None:
         item = random.choice(self.view.items)
