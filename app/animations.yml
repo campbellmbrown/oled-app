@@ -1,0 +1,23 @@
+- name: idle_smile
+  frames:
+    - image: app/images/happy/smile.png
+      duration: 0.2
+    - image: app/images/happy/smile_2.png
+      duration: 0.2
+- name: talk
+  random: true
+  frames:
+    - image: app/images/talk/talk_aei.png
+      duration: 0.15
+    - image: app/images/talk/talk_bmp.png
+      duration: 0.15
+    - image: app/images/talk/talk_cdnstxyz.png
+      duration: 0.15
+    - image: app/images/talk/talk_fvqw.png
+      duration: 0.15
+    - image: app/images/talk/talk_j_sh_ch.png
+      duration: 0.15
+    - image: app/images/talk/talk_o.png
+      duration: 0.15
+    - image: app/images/talk/talk_u.png
+      duration: 0.15

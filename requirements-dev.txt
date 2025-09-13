@@ -2,3 +2,4 @@
 mypy
 ruff
 types-pyserial
+types-PyYAML
