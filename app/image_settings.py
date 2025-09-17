@@ -4,4 +4,5 @@ from dataclasses import dataclass
 @dataclass
 class ImageSettings:
     invert: bool
-    threshold: int
+    brightness: int = 0
+    contrast: float = 0

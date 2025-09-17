@@ -99,5 +99,6 @@ class MainController:
     def _get_image_settings(self) -> ImageSettings:
         return ImageSettings(
             invert=self.view.invert_checkbox.isChecked(),
-            threshold=self.view.threshold.value(),
+            contrast=self.view.contrast.value(),
+            brightness=self.view.brightness.value(),
         )

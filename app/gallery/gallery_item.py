@@ -12,12 +12,15 @@ class GalleryItem(QToolButton):
 
         image = QImage(image_path).convertToFormat(QImage.Format.Format_Grayscale8)
 
-        assert image.width() == oled.WIDTH, f"Image width expected to be {oled.WIDTH}px, got {image.width()}px"
-        assert image.height() == oled.HEIGHT, f"Image height expected to be {oled.HEIGHT}px, got {image.height()}px"
+        # Image must be either 128x64 or 64x128 (rotated)
+        assert (image.width() == oled.WIDTH and image.height() == oled.HEIGHT) or (
+            image.width() == oled.HEIGHT and image.height() == oled.WIDTH
+        )
+
         self.setIcon(QIcon(QPixmap.fromImage(image)))
         self.setText(title)
         self.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextUnderIcon)
-        self.setIconSize(QSize(oled.WIDTH, oled.HEIGHT))
+        self.setIconSize(QSize(image.width(), image.height()))
         self.setAutoRaise(True)
 
         # Remove border from stylesheet

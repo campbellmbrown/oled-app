@@ -1,10 +1,16 @@
-from PySide6.QtGui import QImage
+from PySide6.QtGui import QImage, QTransform
 
 from app import oled
 from app.image_settings import ImageSettings
 
 
-def dither_pixel(pixel: int, x: int, y: int, image_settings: ImageSettings) -> int:
+def adjust_pixel(pixel: int, image_settings: ImageSettings) -> int:
+    brightness = -image_settings.brightness if image_settings.invert else image_settings.brightness
+    pixel = int((pixel - 128) * (1 + image_settings.contrast) + 128 + brightness)
+    return max(0, min(255, pixel))  # clamp to [0, 255]
+
+
+def dither_pixel(pixel: int, x: int, y: int) -> int:
     # 4x4 Bayer matrix (values scaled 0-15)
     bayer4 = [
         [0, 8, 2, 10],
@@ -27,16 +33,20 @@ def img_to_pixels(image_path: str, image_settings: ImageSettings) -> bytearray:
     if image_settings.invert:
         image.invertPixels()
 
+    if image.width() == oled.HEIGHT:
+        # Image is rotated 90 degrees. Let's fix that.
+        image = image.transformed(QTransform().rotate(90))
+
     assert image.width() == oled.WIDTH
     assert image.height() == oled.HEIGHT
-
     byte_array = bytearray()
 
     for y in range(image.height()):
         byte = 0
         for x in range(image.width()):
             pixel = image.pixelColor(x, y).value()  # 0-255 grayscale
-            bit = dither_pixel(pixel, x, y, image_settings)
+            pixel = adjust_pixel(pixel, image_settings)
+            bit = dither_pixel(pixel, x, y)
             byte = (byte << 1) | bit
             if (x + 1) % 8 == 0:
                 # Bit reversal for correct display orientation
