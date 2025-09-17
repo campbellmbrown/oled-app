@@ -41,6 +41,7 @@ class MainController:
         self.animation_timer = QTimer()
         self.animation_timer.timeout.connect(self._update_animation)
 
+        view.invert_checkbox.setChecked(True)
         view.refresh_button.clicked.connect(self._populate_ports)
         self._populate_ports()
 

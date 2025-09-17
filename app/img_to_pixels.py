@@ -5,7 +5,7 @@ from app.image_settings import ImageSettings
 
 
 def dither_pixel(pixel: int, x: int, y: int, image_settings: ImageSettings) -> int:
-    # 4×4 Bayer matrix (values scaled 0–15)
+    # 4x4 Bayer matrix (values scaled 0-15)
     bayer4 = [
         [0, 8, 2, 10],
         [12, 4, 14, 6],
@@ -19,10 +19,7 @@ def dither_pixel(pixel: int, x: int, y: int, image_settings: ImageSettings) -> i
     # scale Bayer value (0-15) to 0-255
     bayer_threshold = (threshold_map_value + 0.5) * (255 / 16)
 
-    # combine with user’s threshold scaling if desired
-    effective_threshold = image_settings.threshold * (255 / 255)
-
-    return 1 if pixel < (bayer_threshold + effective_threshold - 128) else 0
+    return 1 if pixel < bayer_threshold else 0
 
 
 def img_to_pixels(image_path: str, image_settings: ImageSettings) -> bytearray:
