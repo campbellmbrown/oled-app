@@ -21,3 +21,151 @@
       duration: 0.15
     - image: app/images/talk/talk_u.png
       duration: 0.15
+- name: mind blown
+  frames:
+    - image: app/gif/mind_blown/frame_00.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_01.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_02.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_03.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_04.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_05.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_06.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_07.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_08.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_09.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_10.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_11.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_12.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_13.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_14.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_15.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_16.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_17.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_18.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_19.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_20.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_21.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_22.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_23.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_24.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_25.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_26.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_27.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_28.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_29.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_30.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_31.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_32.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_33.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_34.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_35.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_36.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_37.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_38.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_39.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_40.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_41.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_42.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_43.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_44.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_45.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_46.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_47.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_48.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_49.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_50.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_51.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_52.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_53.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_54.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_55.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_56.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_57.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_58.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_59.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_60.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_61.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_62.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_63.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_64.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_65.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_66.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_67.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_68.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_69.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_70.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_71.png
+      duration: 0.07
+    - image: app/gif/mind_blown/frame_72.png
+      duration: 0.07
